@@ -33,5 +33,17 @@ namespace Grocery.Core.Data.Repositories
         {
             return clientList;
         }
+        
+        public void Add(Client client)
+        {
+            try
+            {
+                clientList.Add(client);
+            }
+            catch
+            {
+                throw new Exception("Kon gebruiker niet toevoegen.");
+            }
+        }
     }
 }
