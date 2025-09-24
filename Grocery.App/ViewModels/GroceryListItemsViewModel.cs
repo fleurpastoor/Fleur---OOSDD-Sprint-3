@@ -88,6 +88,11 @@ namespace Grocery.App.ViewModels
         [RelayCommand]
         public void SearchProduct(string searchText)
         {
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                GetAvailableProducts();
+                return;
+            }
             AvailableProducts.Clear();
             foreach (Product p in _productService.GetAll())
             {
@@ -97,6 +102,10 @@ namespace Grocery.App.ViewModels
                 {
                     AvailableProducts.Add(p);
                 }
+            }
+            if (AvailableProducts.Count == 0)
+            {
+                Toast.Make("Geen producten gevonden").Show();
             }
         }
     }
