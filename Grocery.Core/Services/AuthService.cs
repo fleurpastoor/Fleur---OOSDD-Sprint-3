@@ -20,9 +20,16 @@ namespace Grocery.Core.Services
         }
         public Client Register(string name, string email, string password)
         {
+            if (string.IsNullOrWhiteSpace(name) ||
+                string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentException("Velden mogen niet leeg zijn");
+            }
+
             if (_clientService.Get(email) != null)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("E-mail bestaat al");
             }
             
             string hashedPassword = PasswordHelper.HashPassword(password);

@@ -33,9 +33,9 @@ namespace Grocery.App.ViewModels
                 _authService.Register(Name, Email, Password);
                 RegistrationMessage = "Account succesvol aangemaakt, je kunt nu inloggen.";
             }
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
-                RegistrationMessage = "Email is al in gebruik.";
+                RegistrationMessage = ex.Message;
             }
         }
         
