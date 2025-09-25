@@ -28,15 +28,14 @@ namespace Grocery.App.ViewModels
                 RegistrationMessage = "Vul alle velden in.";
                 return;
             }
-
             try
             {
                 _authService.Register(Name, Email, Password);
                 RegistrationMessage = "Account succesvol aangemaakt, je kunt nu inloggen.";
             }
-            catch
+            catch (ArgumentException)
             {
-                RegistrationMessage = "Ongeldige gegevens ingevoerd.";
+                RegistrationMessage = "Email is al in gebruik.";
             }
         }
         

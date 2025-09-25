@@ -20,6 +20,11 @@ namespace Grocery.Core.Services
         }
         public Client Register(string name, string email, string password)
         {
+            if (_clientService.Get(email) != null)
+            {
+                throw new ArgumentException();
+            }
+            
             string hashedPassword = PasswordHelper.HashPassword(password);
             int id = _clientService.GetAll().Max(c => c.Id);
             Client newClient = new(id + 1, name, email, hashedPassword);
