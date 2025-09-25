@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - development
-      - feature/UnitTesting
+      - feature/uc09-registratie-gebruiker
   pull_request:
     branches:
       - main
