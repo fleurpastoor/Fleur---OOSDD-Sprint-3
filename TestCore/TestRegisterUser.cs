@@ -62,7 +62,6 @@ namespace TestCore
             }
             catch (ArgumentException ex)
             {
-                // Optioneel: controleer de foutmelding
                 Assert.AreEqual("E-mail bestaat al", ex.Message);
             }
         }
