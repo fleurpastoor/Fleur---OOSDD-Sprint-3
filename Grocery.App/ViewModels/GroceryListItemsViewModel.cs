@@ -85,6 +85,28 @@ namespace Grocery.App.ViewModels
                 await Toast.Make($"Opslaan mislukt: {ex.Message}").Show(cancellationToken);
             }
         }
-
+        [RelayCommand]
+        public void SearchProduct(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                GetAvailableProducts();
+                return;
+            }
+            AvailableProducts.Clear();
+            foreach (Product p in _productService.GetAll())
+            {
+                if (p.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) &&
+                    MyGroceryListItems.FirstOrDefault(g => g.ProductId == p.Id) == null &&
+                    p.Stock > 0)
+                {
+                    AvailableProducts.Add(p);
+                }
+            }
+            if (AvailableProducts.Count == 0)
+            {
+                Toast.Make("Geen producten gevonden").Show();
+            }
+        }
     }
 }
