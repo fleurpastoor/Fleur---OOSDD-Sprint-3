@@ -10,7 +10,7 @@ namespace TestCore
         }
 
 
-        //Happy flow
+        // Happy flow
         [Test]
         public void TestPasswordHelperReturnsTrue()
         {
@@ -25,20 +25,21 @@ namespace TestCore
         {
             Assert.IsTrue(PasswordHelper.VerifyPassword(password, passwordHash));
         }
-
-
-        //Unhappy flow
+        
+        // Unhappy flow
         [Test]
         public void TestPasswordHelperReturnsFalse()
         {
-            Assert.Pass(); //Zelf uitwerken
+            string password = "user3";
+            string passwordHash = "dOk+X+wt+MA9uIniRGKDFg==.QLvy72hdG8nWj1FyL75KoKeu4DUgu5B/HAHqTD2UFLU=";
+            Assert.IsFalse(PasswordHelper.VerifyPassword(password, passwordHash));
         }
 
-        [TestCase("user1", "IunRhDKa+fWo8+4/Qfj7Pg==.kDxZnUQHCZun6gLIE6d9oeULLRIuRmxmH2QKJv2IM08")]
-        [TestCase("user3", "sxnIcZdYt8wC8MYWcQVQjQ==.FKd5Z/jwxPv3a63lX+uvQ0+P7EuNYZybvkmdhbnkIHA")]
+        [TestCase("user1", "dOk+X+wt+MA9uIniRGKDFg==.QLvy72hdG8nWj1FyL75KoKeu4DUgu5B/HAHqTD2UFLU=")]
+        [TestCase("user3", "dOk+X+wt+MA9uIniRGKDFg==.QLvy72hdG8nWj1FyL75KoKeu4DUgu5B/HAHqTD2UFLU=")]
         public void TestPasswordHelperReturnsFalse(string password, string passwordHash)
         {
-            Assert.Fail(); //Zelf uitwerken zodat de test slaagt!
+            Assert.IsFalse(PasswordHelper.VerifyPassword(password, passwordHash));
         }
     }
 }
